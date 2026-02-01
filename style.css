@@ -1,0 +1,56 @@
+body {
+  background: linear-gradient(135deg, #ff9ebc, #ff6f91);
+  font-family: 'Poppins', sans-serif;
+}
+
+.app-title {
+  color: white;
+  font-weight: 700;
+}
+
+.subtitle {
+  color: #ffe6ee;
+}
+
+.blossom-card {
+  border-radius: 20px;
+  background: #ffe6ee;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.form-control {
+  border-radius: 12px;
+}
+
+.btn-blossom {
+  background: #ff4f87;
+  color: white;
+  border-radius: 12px;
+  border: none;
+}
+
+.btn-blossom:hover {
+  background: #ff2f73;
+}
+
+.task-section h5 {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.task-card {
+  background: white;
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.task-actions button {
+  margin-right: 5px;
+}
+
+.footer-text {
+  color: white;
+  font-weight: 500;
+}
