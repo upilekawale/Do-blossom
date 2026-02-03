@@ -15,8 +15,13 @@ function addTask() {
     <h6>${name}</h6>
     <p>Due: ${new Date(date).toLocaleString()}</p>
     <div class="task-actions">
-      <button class="btn btn-success btn-sm" onclick="completeTask(this)">✔ Complete</button>
-      <button class="btn btn-danger btn-sm" onclick="deleteTask(this)">🗑 Delete</button>
+      <button class="btn btn-blossom-complete btn-sm" onclick="completeTask(this)">
+  ✔ Complete
+</button>
+      <button class="btn btn-blossom-delete btn-sm" onclick="deleteTask(this)">
+  🗑 Delete
+</button>
+
     </div>
   `;
 

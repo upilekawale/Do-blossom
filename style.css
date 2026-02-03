@@ -54,3 +54,28 @@ body {
   color: white;
   font-weight: 500;
 }
+.btn-blossom-complete {
+  background-color: #ff6f91;   /* Blossom pink */
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.btn-blossom-complete:hover {
+  background-color: #ff4f87;
+  color: white;
+}
+
+.btn-blossom-delete {
+  background-color: #ff4d6d;   /* Soft blossom red-pink */
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.btn-blossom-delete:hover {
+  background-color: #e63956;
+  color: white;
+}
