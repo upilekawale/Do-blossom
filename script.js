@@ -1,3 +1,19 @@
+
+/* =========================
+   GLOBAL STORAGE
+========================= */
+let tasks = JSON.parse(localStorage.getItem("doBlossomTasks")) || [];
+
+/* =========================
+   SAVE TO LOCAL STORAGE
+========================= */
+function saveTasks() {
+  localStorage.setItem("doBlossomTasks", JSON.stringify(tasks));
+}
+
+/* =========================
+   ADD TASK
+========================= */
 function addTask() {
   const name = document.getElementById("taskName").value;
   const date = document.getElementById("taskDate").value;
@@ -8,39 +24,89 @@ function addTask() {
     return;
   }
 
-  const taskCard = document.createElement("div");
-  taskCard.className = "task-card";
+  const task = {
+    id: Date.now(),
+    name: name,
+    date: date,
+    priority: priority,
+    completed: false
+  };
 
-  taskCard.innerHTML = `
-    <h6>${name}</h6>
-    <p>Due: ${new Date(date).toLocaleString()}</p>
-    <div class="task-actions">
-      <button class="btn btn-blossom-complete btn-sm" onclick="completeTask(this)">
-  ✔ Complete
-</button>
-      <button class="btn btn-blossom-delete btn-sm" onclick="deleteTask(this)">
-  🗑 Delete
-</button>
-
-    </div>
-  `;
-
-  if (priority === "urgent") {
-    document.getElementById("urgentTasks").appendChild(taskCard);
-  } else {
-    document.getElementById("normalTasks").appendChild(taskCard);
-  }
+  tasks.push(task);
+  saveTasks();
+  renderTasks();
 
   document.getElementById("taskName").value = "";
   document.getElementById("taskDate").value = "";
 }
 
-function deleteTask(btn) {
-  btn.closest(".task-card").remove();
+/* =========================
+   RENDER TASKS
+========================= */
+function renderTasks() {
+  document.getElementById("urgentTasks").innerHTML = "";
+  document.getElementById("normalTasks").innerHTML = "";
+
+  tasks.forEach(task => {
+    const taskCard = document.createElement("div");
+    taskCard.className = "task-card";
+
+    if (task.completed) {
+      taskCard.style.opacity = "0.6";
+      taskCard.style.textDecoration = "line-through";
+    }
+
+    taskCard.innerHTML = `
+      <h6>${task.name}</h6>
+      <p>Due: ${new Date(task.date).toLocaleString()}</p>
+      <div class="task-actions">
+        <button class="btn btn-blossom-complete btn-sm" onclick="completeTask(${task.id})">
+          ✔ Complete
+        </button>
+        <button class="btn btn-blossom-delete btn-sm" onclick="deleteTask(${task.id})">
+          🗑 Delete
+        </button>
+      </div>
+    `;
+
+    if (task.priority === "urgent") {
+      document.getElementById("urgentTasks").appendChild(taskCard);
+    } else {
+      document.getElementById("normalTasks").appendChild(taskCard);
+    }
+  });
 }
 
-function completeTask(btn) {
-  const task = btn.closest(".task-card");
-  task.style.opacity = "0.6";
-  task.style.textDecoration = "line-through";
+/* =========================
+   DELETE TASK
+========================= */
+function deleteTask(id) {
+  tasks = tasks.filter(task => task.id !== id);
+  saveTasks();
+  renderTasks();
+}
+
+/* =========================
+   COMPLETE TASK
+========================= */
+function completeTask(id) {
+  tasks = tasks.map(task =>
+    task.id === id ? { ...task, completed: true } : task
+  );
+  saveTasks();
+  renderTasks();
+}
+
+
+
+
+/* =========================
+   LOAD TASKS ON PAGE LOAD
+========================= */
+renderTasks();
+
+
+function logout() {
+  localStorage.removeItem("loggedInUser");
+  window.location.href = "signin.html";
 }

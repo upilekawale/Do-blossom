@@ -12,7 +12,7 @@ function signup() {
   localStorage.setItem("doblossomUser", JSON.stringify(user));
 
   alert("Account created successfully 🌸");
-  window.location.href = "login.html";
+  window.location.href = "index.html";
 }
 
 function login() {
@@ -32,4 +32,21 @@ function login() {
   } else {
     alert("Incorrect email or password 🌸");
   }
+
+  window.onload = function () {
+  const user = localStorage.getItem("loggedInUser");
+
+  if (!user) {
+    window.location.href = "signin.html";
+  } else {
+    document.getElementById("welcomeUser").innerText =
+      `Hello, ${user} 🌸`;
+  }
+};
+
+
+
+
+
+
 }
